@@ -2,6 +2,7 @@ package com.zemsania.pruebatecnica.carrodecompra.modelos;
 
 
 import javax.persistence.*;
+import java.util.List;
 
 
 @Entity
@@ -12,6 +13,8 @@ public class Producto {
     private int idProducto;
     private String nombre;
     private int precio;
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "idProducto", cascade = CascadeType.ALL)
+    private List<DetalleVenta> detallesVenta;
 
     public int getIdProducto() {
         return idProducto;
@@ -35,5 +38,13 @@ public class Producto {
 
     public void setPrecio(int precio) {
         this.precio = precio;
+    }
+
+    public List<DetalleVenta> getDetallesVenta() {
+        return detallesVenta;
+    }
+
+    public void setDetallesVenta(List<DetalleVenta> detallesVenta) {
+        this.detallesVenta = detallesVenta;
     }
 }

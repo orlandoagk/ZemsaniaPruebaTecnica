@@ -23,3 +23,8 @@ Otro aspecto a considerar es la tabla de DetallesVenta ya que se puede quitar es
 ## Dockerfile
 
 Para el Dockerfile quiero agregar que por cuestiones tecnicas de mi computador no logro instalar el motor de Docker por ende en la misma imagen clono el repositorio ya que considero que es una manera fácil de pasarse el repositorio a una instancia de MV en la nube (fue probado en AWS usando AWS Linux)
+
+## Notas
+
+- Me disculpo que si no realice lo de los Logs con Log4j2, ya que estuve investigandolo (Nunca lo había usado) antes de empezar a implementar la solución pero no logré entenderlo a tiempo ya que me consumió más tiempo y tenia limite hasta el final del día, por ende decidí seguir sin eso
+- Realicé push después de la hora por razones de tiempo, ya que estuve todo el día en mi universidad realizando un proyecto del semillero que estoy liderando, lo cual me quito bastante tiempo mientras llegaba a mi casa a empezar a desarrollar la prueba técnica. Espero me puedan entender.

@@ -15,6 +15,10 @@ public class Venta {
     @JsonIgnore
     private Cliente idCliente;
     private String fecha;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn
+    @JsonIgnore
+    private DetalleVenta idDetalleVenta;
 
     public int getIdVenta() {
         return idVenta;
@@ -38,5 +42,13 @@ public class Venta {
 
     public void setFecha(String fecha) {
         this.fecha = fecha;
+    }
+
+    public DetalleVenta getIdDetalleVenta() {
+        return idDetalleVenta;
+    }
+
+    public void setIdDetalleVenta(DetalleVenta idDetalleVenta) {
+        this.idDetalleVenta = idDetalleVenta;
     }
 }
