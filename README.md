@@ -10,7 +10,7 @@ Pruebas exitosas
 ![Image](images/PruebasExitosas.PNG)
 
 
-## Respustas a preguntas realizadas
+## Respuestas a preguntas realizadas
 
 Con sus propias palabras indique de qué forma podría mejorar la seguridad y optimizar el carrito de compras.
 
