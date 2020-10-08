@@ -1,6 +1,7 @@
 package com.zemsania.pruebatecnica.carrodecompra;
 
 import com.zemsania.pruebatecnica.carrodecompra.modelos.Cliente;
+import com.zemsania.pruebatecnica.carrodecompra.modelos.Producto;
 import com.zemsania.pruebatecnica.carrodecompra.modelos.Venta;
 import com.zemsania.pruebatecnica.carrodecompra.servicios.AuthServices.AuthServices;
 import com.zemsania.pruebatecnica.carrodecompra.servicios.ServiciosCarro.ImplServiciosCarroCompra;
@@ -48,6 +49,27 @@ class CarrodecompraApplicationTests {
         implServiciosCarroCompra.añadirVenta(venta,cliente.getDni());
         List<Venta> ventas = implServiciosCarroCompra.obtenerVentasDeCliente(cliente.getDni());
         Assert.isTrue(ventas.size()==1,"Las ventas deben ser igual a 1");
+
+    }
+
+    @Test
+    void deberiaAgregarYConsultarProducto(){
+        Producto producto = new Producto();
+        producto.setNombre("Camisa Polo");
+        producto.setPrecio(100000);
+        implServiciosCarroCompra.añadirProducto(producto);
+        Assert.isTrue(implServiciosCarroCompra.obtenerProducto(producto.getIdProducto()).getNombre().equals("Camisa Polo"),
+                "Deberia consultar el producto Polo");
+
+    }
+
+    @Test
+    void deberiaFallarAlConsultarUnProducto(){
+        try {
+            implServiciosCarroCompra.obtenerProducto(500);
+        }catch (Exception e){
+            Assert.isTrue(e.getMessage().equals("No value present"),"Deberia arrojar el error de que no existe valor para ese caso");
+        }
 
     }
 
