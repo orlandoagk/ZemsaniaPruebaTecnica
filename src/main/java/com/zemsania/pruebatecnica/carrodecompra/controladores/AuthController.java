@@ -7,6 +7,9 @@ import com.zemsania.pruebatecnica.carrodecompra.modelos.JWToken;
 import com.zemsania.pruebatecnica.carrodecompra.servicios.AuthServices.AuthServices;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import lombok.extern.log4j.Log4j2;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
@@ -23,6 +26,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Log4j2
 @RestController
 @RequestMapping("/auth")
 public class AuthController {
@@ -30,20 +34,27 @@ public class AuthController {
     @Autowired
     private AuthServices authServices;
 
+    Logger log4j2 = LogManager.getRootLogger();
 
     @RequestMapping(value="/login",method=RequestMethod.POST)
     public ResponseEntity<?> login(@RequestBody JWToken jwToken){
-        if(authServices.loginCorrecto(jwToken.getUsername(),jwToken.getPassword())) {
-            String token = getJWTToken(jwToken.getUsername());
-            jwToken.setPassword(null);
-            jwToken.setToken(token);
-            //LOGGER LOGIN EXITOSO
-            return new ResponseEntity<>(jwToken, HttpStatus.OK);
-        } else {
-            //LOGGER USUARIO O CONTRASEÑA INCORRECTA
-            System.out.println("Usuario o contraseña incorrecta");
-            return new ResponseEntity<>(HttpStatus.FORBIDDEN);
+        try {
+            if (authServices.loginCorrecto(jwToken.getUsername(), jwToken.getPassword())) {
+                String token = getJWTToken(jwToken.getUsername());
+                jwToken.setPassword(null);
+                jwToken.setToken(token);
+                log4j2.debug("El inicio de sesion fue existoso");
+                return new ResponseEntity<>(jwToken, HttpStatus.OK);
+            } else {
+
+                log4j2.info("datos incorrectos en el logeo");
+                System.out.println("Usuario o contraseña incorrecta");
+                return new ResponseEntity<>(HttpStatus.FORBIDDEN);
+            }
+        } catch (Exception e){
+            log4j2.error("error en logeo");
         }
+        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
     public  String getJWTToken(String username) {
         String secretKey = "zemsaniaSecret";
